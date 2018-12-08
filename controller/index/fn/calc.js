@@ -21,7 +21,7 @@ var reduceFamily = 0 // 赡养老人扣除
 var taxList = [3000, 12000, 25000, 35000, 55000, 80000, -1]
 var taxRateList = [0.03, 0.10, 0.20, 0.25, 0.30, 0.35, 0.45]
 function calc(money, i) {
-
+  if (money <= beginLine) return 0
   if (taxList[i] === -1) return money * taxRateList[i]
   var cur = 0
   if (money <= taxList[i]) {
@@ -41,9 +41,9 @@ module.exports = function (body) {
   reduceHouse = body.reduceHouse
   reduceHouseRent = body.reduceHouseRent
   reduceFamily = body.reduceFamily
-  var beginMoney = money - beginLine - insurance - (accumulation * accumulationRate) - reduceHouse - reduceHouseRent
+  var beginMoney = money - beginLine - insurance - (accumulation * accumulationRate) - reduceHouse - reduceHouseRent - (reduceChildren * 1000)
   var tax = calc(beginMoney, 0) // 交税总额
-  var last = money - tax - insurance - (accumulation * accumulationRate) // 剩余应缴税金额
+  var last = money - tax - insurance - (accumulation * accumulationRate) // 税后收入
   return {
     tax: tax,
     lastMoney: last,
