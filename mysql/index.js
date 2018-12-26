@@ -8,10 +8,7 @@ const mysql = require('mysql')
 
 function connectMysql(sql, callback) {
   let connection = mysql.createConnection({
-    host     : '119.27.171.196',
-    user     : 'root',
-    password : 'zhn094911',
-    database : 'lysub'
+    
   })
 
   connection.connect()
