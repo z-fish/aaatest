@@ -7,7 +7,7 @@ let connectMysql = require('../../mysql/index')
 
 let newsList = () => {
   return new Promise((resolve, reject) => {
-    let sql = 'select id as id, title as title, des as des, time as time, shareImg as img from ly_sub_news ;'
+    let sql = 'select id as id, title as title, des as des, time as time, shareImg as img from ly_sub_news order by id desc ;'
     connectMysql(sql, (err, results, fields) => {
       resolve(results)
     })
