@@ -11,6 +11,7 @@ let newsList = require('./lysub/newsList');
 let newsDetail = require('./lysub/newsDetail');
 let fileApi = require('./file')
 let newsApi = require('./lysub/newsApi')
+let messasgeApi = require('./lysub/messageApi')
 
 /* GET home page. */
 router.post('/api/getCalc', function(req, res, next) {
@@ -27,6 +28,19 @@ router.post('/api/sub/news-list', function(req, res, next) {
 router.post('/api/sub/news-detail', function(req, res, next) {
   if (!req.body) return res.send('null')
   newsDetail(req.body.id).then(data => {
+    res.send(data);
+  })
+});
+
+router.post('/api/sub/message-list', function(req, res, next) {
+  messasgeApi.list().then(data => {
+    res.send(data);
+  })
+});
+
+router.post('/api/sub/message-submit', function(req, res, next) {
+  if (!req.body) return res.send('null')
+  messasgeApi.submit(req.body).then(data => {
     res.send(data);
   })
 });
